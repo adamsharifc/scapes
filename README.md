@@ -22,7 +22,6 @@ Scapes is a tool designed to speed up sound design. It aims to offer a convenien
 
 - **Rust** (backend)
 - **SQLite** (database)
-- **PoloDB** (database) (_experimental_)
 - **Svelte** (frontend)
 - **Tauri** (desktop app)
 - **C++** (integrations)
