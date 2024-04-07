@@ -4,7 +4,7 @@ Scapes is a tool designed to speed up sound design. It aims to offer a convenien
 
 **Minimum Viable Product (MVP):** Provide a simple and fast way to search and preview sounds.
 
-**Moonshot:** Provide a way to manage local sound libraries and search and preview sounds from multiple libraries, integrated with multiple sound libraries and sound libraries APIs, and automate repetitive tasks in sound design.
+**Moonshot:** Provide functionality to manage, search, and preview local sound libraries as well as integration with multiple sound libraries and sound libraries APIs. 
 
 ---
 
