@@ -14,5 +14,8 @@
     "@tauri-apps/cli": "^1.5.11",
     "svelte": "^4.2.12",
     "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.5.3"
   }
 }
