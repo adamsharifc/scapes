@@ -2,12 +2,14 @@
 import SearchBar from "./lib/SearchBar.svelte";
 import DataTable from "./lib/DataTable.svelte";
 import StatusBar from "./lib/StatusBar.svelte";
+import InfoPane from "./lib/InfoPane.svelte";
 </script>
 
 <div class="container">
     <SearchBar />
     <DataTable />
     <StatusBar />
+    <InfoPane />
 </div>
 
 <style>
