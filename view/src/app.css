@@ -29,6 +29,7 @@
   --size-2: 0.5rem;
   --size-3: 0.75rem;
   --size-4: 1rem;
+  --size-4-5: 1.25rem;
   --size-5: 1.5rem;
   --size-6: 2rem;
   --size-7: 3rem;
@@ -81,25 +82,3 @@ body{
   overscroll-behavior: none;
 }
 
-/* Desktop App TitleBar Styles */
-.titlebar {
-  height: 30px;
-  background: #329ea3;
-  user-select: none;
-  display: flex;
-  justify-content: flex-end;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.titlebar-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-}
-.titlebar-button:hover {
-  background: #5bbec3;
-}
