@@ -73,10 +73,9 @@ onMount(()=> {
 }
 .titlebar-title{
     font-size: var(--size-4-5);
-    background-image: linear-gradient(45deg, red, cornflowerblue);
     background-clip: text;
     font-weight: 500;
-    color: transparent;
+    color: white;
     padding: var(--size-2) var(--size-3);
     height: 100%;
     display: flex;

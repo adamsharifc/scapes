@@ -55,6 +55,8 @@
   --opacity-9: rgba(255, 255, 255, 0.875);
   --opacity-10: rgba(255, 255, 255, 0.9375);
 
+  --resizer-width: 0.4rem;
+
 }
 body{
   margin: 0;
