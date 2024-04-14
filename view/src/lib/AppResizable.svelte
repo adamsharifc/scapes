@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { PaneGroup, Pane, PaneResizer } from "paneforge";
+    import AppPanel from "./AppPanel.svelte";
+    import AppPrimarySideBar from "./AppPrimarySideBar.svelte";
+    import AppPrimaryView from "./AppPrimaryView.svelte";
+  import App from "../App.svelte";
 </script>
 
 <div class="pane-group">
@@ -9,17 +13,16 @@
             <PaneGroup direction="horizontal">
                 
                 <Pane defaultSize={23} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
-                    <span class="font-semibold">Primary Sidebar</span>
+                    <AppPrimarySideBar/>
                 </Pane>
         
                 <PaneResizer>
                     <div class="pane-resizer-vertical">
                     </div>
                 </PaneResizer>
-        
                 
-                <Pane defaultSize={77} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-2); border-radius:var(--size-2);">
-                    <span class="font-semibold">Primary View</span>
+                <Pane defaultSize={77} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
+                    <AppPrimaryView/>
                 </Pane>
         
             </PaneGroup>
@@ -31,20 +34,13 @@
         </PaneResizer>
 
         <Pane defaultSize={35} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-0); border-radius:var(--size-2);">
-            <span style="font-weight: 600;">Panel</span>
+            <AppPanel/>
         </Pane>
         
     </PaneGroup>
 </div>
 
 <style>
-
-:root{
-    --panel-color: var(--opacity-0);
-    --primary-sidebar-color: var(--opacity-1);
-    --primary-view-color: var(--opacity-2);
-}
-
 .pane-resizer-vertical{
     width: var(--resizer-width);
     height: 99%;

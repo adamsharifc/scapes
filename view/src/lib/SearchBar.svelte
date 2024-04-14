@@ -13,6 +13,9 @@
   function onBlur() {
     isFocused = false;
   }
+
+  
+
 </script>
 
 <div class="container">
@@ -42,6 +45,7 @@
     flex-direction: row;
     justify-content: flex-start;
     min-width: var(--size-14);
+    width: 100%;
     min-height: var(--size-5);
     background-color: transparent;
     color: var(--white);

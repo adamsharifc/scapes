@@ -2,10 +2,13 @@
 import { appWindow } from '@tauri-apps/api/window';
 import { onMount } from 'svelte';
 
-import PhMinusBold from '../assets/icons/PhMinusBold.svelte'
-import PhSquareBold from '../assets/icons/PhSquareBold.svelte'
-import PhXBold from '../assets/icons/PhXBold.svelte'
-
+import PhMinusBold from '../assets/icons/PhMinusBold.svelte';
+import PhSquareBold from '../assets/icons/PhSquareBold.svelte';
+import PhXBold from '../assets/icons/PhXBold.svelte';
+import PhPrimarySideBar from '../assets/icons/PhPrimarySideBar.svelte';
+import PhPanel from '../assets/icons/PhPanel.svelte';
+import PhSecondarySideBar from '../assets/icons/PhSecondarySideBar.svelte';
+import SearchBar from './SearchBar.svelte';
 
 onMount(()=> {
     document.getElementById('titlebar-minimize').addEventListener('click', () => appWindow.minimize())
@@ -17,10 +20,28 @@ onMount(()=> {
 
 <div data-tauri-drag-region class="titlebar">
 
-    <div style="height: 100%;" class="titlebar-title">
+    <div class="titlebar-title">
         scapes
     </div>
-    <div style="height: 100%;">
+
+    <div class="search-bar">
+        <SearchBar />
+    </div>
+
+    <div class="titlebar-buttons">
+        <div class="titlebar-panel-button">
+            <PhPrimarySideBar fill="white" />
+        </div>
+
+        <div class="titlebar-panel-button">
+            <PhSecondarySideBar fill="white" />
+        </div>
+
+        <div class="titlebar-panel-button">
+            <PhPanel fill="white" />
+        </div>
+
+        <div style="padding-left: var(--size-2); display: inline-flex; "></div>
 
         <div class="titlebar-button" id="titlebar-minimize">
             <PhMinusBold fill="white" />
@@ -32,7 +53,6 @@ onMount(()=> {
             <PhXBold fill="white" />
         </div>
     </div>
-
 </div>
 
 
@@ -41,21 +61,22 @@ onMount(()=> {
 .titlebar {
     background: transparent;
     user-select: none;
-    display: inline-flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     flex-wrap: nowrap;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--size-5);
+    max-height: var(--size-6);
+    box-sizing: border-box;
 }
 .titlebar-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: var(--size-1) var(--size-3);
+  padding: var(--size-0-5) var(--size-3);
   border-radius: var(--size-1);
   height: 100%;
 }
@@ -76,12 +97,34 @@ onMount(()=> {
     background-clip: text;
     font-weight: 500;
     color: white;
-    padding: var(--size-2) var(--size-3);
+    padding-left: var(--size-2);
+    padding-top: var(--size-1);
+    padding-bottom: var(--size-1    );
+    box-sizing: border-box;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
-
+.titlebar-panel-button{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--size-0-5) var(--size-2);
+    border-radius: var(--size-1);
+    height: 100%;
+}
+.titlebar-panel-button:hover {
+    background: var(--opacity-3);
+}
+.search-bar{
+    align-items:center;justify-content:center;
+}
+.titlebar-buttons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
 
 </style>

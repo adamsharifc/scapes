@@ -1,21 +1,40 @@
 <script>
-import SearchBar from "./lib/SearchBar.svelte";
-import DataTable from "./lib/DataTable.svelte";
-import StatusBar from "./lib/StatusBar.svelte";
-import InfoPane from "./lib/InfoPane.svelte";
-import DesktopTitleBar from "./lib/DesktopTitleBar.svelte";
-import AppResizable from "./lib/AppResizable.svelte";
+    import DesktopTitleBar from "./lib/DesktopTitleBar.svelte";
+    import AppResizable from "./lib/AppResizable.svelte";
+
+    import { onMount, onDestroy } from "svelte";
+    import { createEventDispatcher } from "svelte";
+    
+    let keydownHandler;
+    const dispatch = createEventDispatcher();
+
+
+    onMount(() => {
+        keydownHandler = function(event) {
+            // Check if the active element is not an input element
+            if (!(document.activeElement instanceof HTMLInputElement)) {
+                console.log(`Key pressed: ${event.key}`);
+
+                if (event.key === "f" || event.key === "F") {
+                    console.log("F key pressed");
+                    // call a function to focus on the search bar
+                    dispatch("focus-search-bar");
+                }
+            }
+        };
+
+        window.addEventListener('keydown', keydownHandler);
+    });
+
+    onDestroy(() => {
+        window.removeEventListener('keydown', keydownHandler);
+    });
 
 </script>
 
 <div class="container">
 
     <DesktopTitleBar />
-
-    <!-- <SearchBar />
-    <DataTable />
-    <StatusBar />
-    <InfoPane /> -->
     <div class="app">
         <AppResizable/>
     </div>
@@ -36,7 +55,7 @@ import AppResizable from "./lib/AppResizable.svelte";
     box-sizing: border-box;
 }
 .app{
-    margin-top: var(--size-6);
+    margin-top: var(--size-6-2-5);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +63,7 @@ import AppResizable from "./lib/AppResizable.svelte";
     /* border: 2px solid red; */
     width: 100%;
     box-sizing: border-box;
-    height: calc(100vh - var(--size-6));
+    height: calc(100vh - var(--size-6-2-5));
 }
 
 </style>
