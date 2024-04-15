@@ -1,6 +1,11 @@
+<script>
+    import WaveForm from "./WaveForm.svelte";
+</script>
+
 
 <div class="container">
-    <span>App Panel</span>
+    <!-- <span>App Panel</span> -->
+    <WaveForm/>
 </div>
 
 

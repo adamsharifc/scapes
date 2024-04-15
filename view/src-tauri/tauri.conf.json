@@ -13,7 +13,25 @@
   "tauri": {
     "allowlist": {
       "all": false,
-
+      "fs": {
+        "scope": ["$HOME\\**", "$AUDIO\\**"],
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": {
+          "allow": ["**"]
+        }
+      },
       "window": {
         "all": false,
         "close": true,
@@ -60,7 +78,7 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; audio-src 'self' asset: https://asset.localhost:5173"
     },
     "updater": {
       "active": false

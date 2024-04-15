@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.3",
-    "paneforge": "^0.0.4"
+    "colormap": "^2.3.2",
+    "paneforge": "^0.0.4",
+    "wavesurfer.js": "^7.7.10"
   }
 }

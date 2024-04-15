@@ -97,9 +97,9 @@ onMount(()=> {
     background-clip: text;
     font-weight: 500;
     color: white;
-    padding-left: var(--size-2);
+    padding-left: var(--size-3);
     padding-top: var(--size-1);
-    padding-bottom: var(--size-1    );
+    padding-bottom: var(--size-1);
     box-sizing: border-box;
     height: 100%;
     display: flex;
