@@ -1,2 +1,9 @@
-reaper.ShowConsoleMsg("This is the lua integration")
-reaper.InsertMedia("C:\\Users\\adams\\Music\\bbcsounds\\07054102.wav", 1)   
+-- reaper.ShowConsoleMsg("This is the lua integration for testing 123")
+-- local filePath = "C:\\Users\\adams\\Music\\bbcsounds\\07054102.wav"
+-- local startTime = 10
+-- local endTime = 25
+-- local fileDuration = 29
+-- local mode = 0
+-- local startPercent = startTime / fileDuration
+-- local endPercent = endTime / fileDuration
+-- reaper.InsertMediaSection(filePath, mode, startPercent, endPercent, 0)

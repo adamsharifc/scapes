@@ -7,33 +7,29 @@
 #include <string>
 #include <windows.h>
 #include <array>
+#include <sstream>
+#include <iomanip>
+#include <limits>
 
+namespace reaper_win {
 const std::string script_filename = "xj3kjd4c.lua";
-const WCHAR* REAPER_window_handle_class_name = L"REAPERwnd";
-
-// lua script to be executed by the reaper DAW
-const std::string script = 
-R"(
--- This is a lua script that will be executed by the REAPER DAW
-reaper.ShowConsoleMsg("This is the lua integration hello from xj3kjd4c.lua\n")
-reaper.InsertMedia("C:\\Users\\adams\\Music\\bbcsounds\\07054102.wav", 1)
-)";
+const WCHAR *REAPER_window_handle_class_name = L"REAPERwnd";
 
 // function prototypes
-int write_lua_script();
+int send_request(std::string file_path, float start_time, float end_time, float file_duration, int mode);
+int write_lua_script(std::string script);
 int delete_lua_script(); 
 int get_REAPER_pid();
 std::string get_file_path_by_pid(int pid);
 std::string run_powershell_command(std::string command);
 std::string get_REAPER_executable_path();
 std::string enclose_quotes(std::string str);
+std::string generate_lua_script(std::string file_path, float start_time, float end_time, float file_duration, int mode);
 bool is_REAPER_running();                                
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);    // dead code
 void print_REAPER_window_handle();                          // dead code
 
-int main(){
-    std::cout << "Reaper Integration!\n";
-
+int send_request(std::string file_path, float start_time, float end_time, float file_duration, int mode){
     // check if reaper is running
     if (!is_REAPER_running()){
         std::cout << "Error: REAPER is not running\n";
@@ -45,8 +41,10 @@ int main(){
         std::cout << "Error: Could not get REAPER executable path\n";
         return 2;
     }
+    // generate the lua script
+    std::string script = generate_lua_script(file_path, start_time, end_time, file_duration, mode);
     // write the lua script to a file
-    if (write_lua_script() != 0){
+    if (write_lua_script(script) != 0){
         std::cout << "Error: Could not write lua script\n";
         return 3;
     }
@@ -62,7 +60,7 @@ int main(){
     return 0;
 }
 // Write a lua script to be executed by the reaper DAW
-int write_lua_script(){    
+int write_lua_script(std::string script){    
     std::ofstream file(script_filename);
     if (file.is_open()){
         file << script;
@@ -80,7 +78,7 @@ int delete_lua_script(){
 }
 // get the process ID of the reaper DAW
 int get_REAPER_pid(){
-    HWND hwnd = FindWindow(REAPER_window_handle_class_name, NULL);
+    HWND hwnd = FindWindowW(REAPER_window_handle_class_name, NULL);
     if (hwnd == NULL){
         std::cout << "Error: Could not find REAPER window\n";
         return -1;
@@ -141,7 +139,7 @@ std::string run_powershell_command(std::string command){
 // }
 // unused print the window handle of the reaper DAW - useful for debugging
 void print_REAPER_window_handle(){
-    HWND hwnd = FindWindow(REAPER_window_handle_class_name, NULL);
+    HWND hwnd = FindWindowW(REAPER_window_handle_class_name, NULL);
     if (hwnd == NULL){
         std::cout << "Error: Could not find REAPER window\n";
         return;
@@ -150,7 +148,7 @@ void print_REAPER_window_handle(){
 }
 // check if the reaper DAW is running
 bool is_REAPER_running(){
-    return FindWindow(REAPER_window_handle_class_name, NULL) != NULL;
+    return FindWindowW(REAPER_window_handle_class_name, NULL) != NULL;
 }
 // get the file path of the reaper executable
 std::string get_REAPER_executable_path(){
@@ -160,6 +158,22 @@ std::string get_REAPER_executable_path(){
     }
     return get_file_path_by_pid(pid);
 }
+// enclose a string in quotes
 std::string enclose_quotes(std::string str){
     return "\"" + str + "\"";
 }
+// get the lua script to insert a media section into the reaper DAW
+std::string generate_lua_script(std::string file_path, float start_time, float end_time, float file_duration, int mode){
+    std::ostringstream script;
+    script << std::setprecision(std::numeric_limits<float>::max_digits10)
+           << "local file_path = [[" << file_path << "]]\n"
+           << "local start_time = " << start_time << "\n"
+           << "local end_time = " << end_time << "\n"
+           << "local file_duration = " << file_duration << "\n"
+           << "local mode = " << mode << "\n"
+           << "local start_percent = start_time / file_duration\n"
+           << "local end_percent = end_time / file_duration\n"
+           << "reaper.InsertMediaSection(file_path, mode, start_percent, end_percent, 0)\n";
+    return script.str();
+}
+} // namespace reaper_win
