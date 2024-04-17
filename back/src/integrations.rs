@@ -5,7 +5,8 @@ use std::os::raw::c_char;
 
 extern "C" {
     fn _SendToTimeline_(start: c_float, end: c_float, duration: c_float, sampleRate: i32, fileName: *const c_char, filePath: *const c_char, daw: *const c_char)->i32;
-    fn _DetectDaw_(daw: *const c_char)->bool;
+    fn _is_DAW_running_(daw: *const c_char)->bool;
+    fn _Scan_All_Daws_()-> *const c_char;
 }
 
 pub fn SendToTimeline(start: f32, end: f32, duration: f32, sampleRate: i32, fileName: &str, filePath: &str, daw: &str)->i32 {
@@ -17,10 +18,17 @@ pub fn SendToTimeline(start: f32, end: f32, duration: f32, sampleRate: i32, file
         return result;
     }
 }
-pub fn DetectDaw(daw: &str)->bool {
+pub fn is_DAW_running(daw: &str)->bool {
     unsafe {
         let daw = CString::new(daw).unwrap();
-        let result = _DetectDaw_(daw.as_ptr());
+        let result = _is_DAW_running_(daw.as_ptr());
         return result;
+    }
+}
+pub fn Scan_All_Daws()-> String {
+    unsafe {
+        let result = _Scan_All_Daws_();
+        let c_str = std::ffi::CStr::from_ptr(result);
+        return c_str.to_str().unwrap().to_string();
     }
 }

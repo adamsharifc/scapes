@@ -4,6 +4,8 @@ fn main() {
     let src = [
         "src/integrations.cpp",
         "src/integrations/protools-win.cpp",
+        "src/integrations/reaper-win.cpp",
+        "src/integrations/detector.cpp"
     ];
         
     cc::Build::new()
@@ -12,4 +14,4 @@ fn main() {
      .compile("integrations.a");
 }
 
-// force rebui
+// force rebuild

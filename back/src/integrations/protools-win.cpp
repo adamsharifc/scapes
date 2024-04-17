@@ -1,6 +1,15 @@
-#include "protools-win.h"
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <windows.h>
 
-int sendRequest_(std::string filePath, short trackOffset, long sampleLoc, short stream, long regionStart_p, long regionStop_p, std::string regionName){
+namespace protools_win{
+// function prototypes
+int send_request(std::string filePath, short trackOffset, long sampleLoc, short stream, long regionStart_p, long regionStop_p, std::string regionName);
+int spotter(std::string xmlString);
+std::string getXMLString(std::string filePath, short trackOffset, long sampleLoc, short stream, long regionStart_p, long regionStop_p, std::string regionName);
+
+int send_request(std::string filePath, short trackOffset, long sampleLoc, short stream, long regionStart_p, long regionStop_p, std::string regionName){
     
     std::string xml = getXMLString(filePath, trackOffset, sampleLoc, stream, regionStart_p, regionStop_p, regionName);
     std::cout << xml << std::endl;
@@ -57,4 +66,5 @@ std::string getXMLString(std::string filePath, short trackOffset, long sampleLoc
         << std::ends;
 
     return os.str();
+}
 }
