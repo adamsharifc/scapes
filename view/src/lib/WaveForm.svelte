@@ -69,6 +69,8 @@
             }
             isRegionCreated = true;
             currentSelectedRegion = region;
+            console.log('region created');
+            console.log(region);
         });
 
     });

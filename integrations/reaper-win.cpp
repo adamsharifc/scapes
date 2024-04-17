@@ -16,6 +16,7 @@ const std::string script =
 R"(
 -- This is a lua script that will be executed by the REAPER DAW
 reaper.ShowConsoleMsg("This is the lua integration hello from xj3kjd4c.lua\n")
+reaper.InsertMedia("C:\\Users\\adams\\Music\\bbcsounds\\07054102.wav", 1)
 )";
 
 // function prototypes
