@@ -47,10 +47,12 @@
     min-width: var(--size-14);
     width: 100%;
     min-height: var(--size-5);
+    height: var(--size-5-2-5);
+    max-height: var(--size-6);
     background-color: transparent;
     color: var(--white);
     border: none;
-    font-size: var(--size-3);
+    font-size: var(--size-3-5);
 }
 .inputElement:focus{
     outline: none;

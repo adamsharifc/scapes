@@ -1,6 +1,11 @@
+<script>
+    import ImportFiles from "./ImportFiles.svelte";
+
+</script>
+
 
 <div class="container">
-    <span>App Primary View</span>
+    <ImportFiles />
 </div>
 
 

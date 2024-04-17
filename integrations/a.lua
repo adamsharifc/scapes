@@ -1,0 +1,1 @@
+reaper.ShowConsoleMsg("This is the lua integration")

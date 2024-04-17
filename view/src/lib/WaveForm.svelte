@@ -2,16 +2,17 @@
     import colormap from 'colormap';
     import WaveSurfer from 'wavesurfer.js';
     import Regions from 'wavesurfer.js/dist/plugins/regions.esm.js'
-    import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
-    import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
-    import Hover from 'wavesurfer.js/dist/plugins/hover.esm.js'
+    import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js';
+    import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js';
+    import Hover from 'wavesurfer.js/dist/plugins/hover.esm.js';
+    import ZoomPlugin from 'wavesurfer.js/dist/plugins/zoom.esm.js';
 
     import { onMount } from 'svelte';
     import { BaseDirectory } from '@tauri-apps/api/fs';
     import { convertFileSrc } from '@tauri-apps/api/tauri';
-    const opacity_9 = "rgba(255, 255, 255, 0.875)";  // opacity-9 from the theme
-    const opacity_7 = "rgba(255, 255, 255, 0.625)";  // opacity-7 frpm the theme
-    const opacity_4 = "rgba(255, 255, 255, 0.25)";   // opacity-4 from the theme
+    const opacity_9 = "rgba(255, 255, 255, 0.875)";  // --opacity-9 from the theme
+    const opacity_7 = "rgba(255, 255, 255, 0.625)";  // --opacity-7 frpm the theme
+    const opacity_4 = "rgba(255, 255, 255, 0.25)";   // --opacity-4 from the theme
 
     let colors = colormap({
         colormap: 'inferno',
@@ -37,6 +38,10 @@
     
         // plugins
         wavesurfer_regions = wavesurfer.registerPlugin(Regions.create());
+        // wavesurfer_regions = wavesurfer.registerPlugin(TimelinePlugin.create({
+        //     // @ts-ignore
+        //     container: document.querySelector('.waveform-container'),
+        // }));
         wavesurfer_spectogram = wavesurfer.registerPlugin(Spectrogram.create(
             {
                 colorMap: colors,
@@ -52,10 +57,12 @@
         });
 
         // wavesurfer_regions plugin
+        // @ts-ignore
         wavesurfer_regions.enableDragSelection({
             color: opacity_4,
         })
         // wavesurfer_regions 
+        // @ts-ignore
         wavesurfer_regions.on('region-created', (region) => {
             if (isRegionCreated){
                 currentSelectedRegion.remove();
@@ -90,6 +97,7 @@
 <div class="container">
     <button type="button" on:click={loadSound}>load sound</button>
     
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="waveform-spectogram-container" on:mousedown={handleMouseDown}>
         <div bind:this={waveform_container} id="waveform-container" class="waveform-container">
             <!-- Waveform is rendered here -->

@@ -2,6 +2,7 @@
 import { appWindow } from '@tauri-apps/api/window';
 import { onMount } from 'svelte';
 
+import PhWaveform from '../assets/icons/PhWaveform.svelte';
 import PhMinusBold from '../assets/icons/PhMinusBold.svelte';
 import PhSquareBold from '../assets/icons/PhSquareBold.svelte';
 import PhXBold from '../assets/icons/PhXBold.svelte';
@@ -20,15 +21,16 @@ onMount(()=> {
 
 <div data-tauri-drag-region class="titlebar">
 
-    <div class="titlebar-title">
+    <div data-tauri-drag-region class="titlebar-title">
+        <PhWaveform fill="white" />
         scapes
     </div>
 
-    <div class="search-bar">
+    <div data-tauri-drag-region class="search-bar" >
         <SearchBar />
     </div>
 
-    <div class="titlebar-buttons">
+    <div data-tauri-drag-region class="titlebar-buttons">
         <div class="titlebar-panel-button">
             <PhPrimarySideBar fill="white" />
         </div>
@@ -71,6 +73,8 @@ onMount(()=> {
     right: 0;
     max-height: var(--size-6);
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }
 .titlebar-button {
   display: inline-flex;
@@ -98,8 +102,6 @@ onMount(()=> {
     font-weight: 500;
     color: white;
     padding-left: var(--size-3);
-    padding-top: var(--size-1);
-    padding-bottom: var(--size-1);
     box-sizing: border-box;
     height: 100%;
     display: flex;
@@ -118,7 +120,8 @@ onMount(()=> {
     background: var(--opacity-3);
 }
 .search-bar{
-    align-items:center;justify-content:center;
+    align-items:center;
+    justify-content:center;
 }
 .titlebar-buttons{
     display: flex;
