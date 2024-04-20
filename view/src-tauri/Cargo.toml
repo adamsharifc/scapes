@@ -1,8 +1,8 @@
 [package]
 name = "app"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "Tauri backend for Svelte app"
+authors = ["Adam Sharif"]
 license = ""
 repository = ""
 default-run = "app"
@@ -13,11 +13,16 @@ rust-version = "1.60"
 
 [build-dependencies]
 tauri-build = { version = "1.5.1", features = [] }
+cc = "1.0"
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.6.1", features = [ "dialog-all", "protocol-asset", "fs-all", "window-close", "window-unmaximize", "window-maximize", "window-minimize", "window-unminimize", "window-show", "window-start-dragging", "window-hide"] }
+chrono = "0.4.38"
+rusqlite = {version = "*", features = ["bundled"] }
+sha2 = "0.10.8"
+
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

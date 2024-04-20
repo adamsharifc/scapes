@@ -12,7 +12,7 @@
         <Pane defaultSize={65} >
             <PaneGroup direction="horizontal">
                 
-                <Pane defaultSize={23} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
+                <Pane defaultSize={20} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
                     <AppPrimarySideBar/>
                 </Pane>
         
@@ -21,7 +21,7 @@
                     </div>
                 </PaneResizer>
                 
-                <Pane defaultSize={77} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
+                <Pane defaultSize={80} style="display:flex; justify-content: center; align-items:center; background-color: var(--opacity-1); border-radius:var(--size-2);">
                     <AppPrimaryView/>
                 </Pane>
         

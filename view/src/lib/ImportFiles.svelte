@@ -1,24 +1,24 @@
 <script>
-   import { open } from '@tauri-apps/api/dialog';
+//    import { open } from '@tauri-apps/api/dialog';
    import PhFolders from '../assets/icons/PhFolders.svelte';
    import { invoke } from '@tauri-apps/api/tauri';
     // Open a selection dialog for image files
     
     async function openFolderDialog(){
-        const selected = await open({
-        multiple: true,
-        filters: [{
-            name: 'Image',
-            extensions: ['png', 'jpeg']
-        }]
-        });
-        if (Array.isArray(selected)) {
-        // user selected multiple files
-        } else if (selected === null) {
-        // user cancelled the selection
-        } else {
-        // user selected a single file
-        }
+        // const selected = await open({
+        // multiple: true,
+        // filters: [{
+        //     name: 'Image',
+        //     extensions: ['png', 'jpeg']
+        // }]
+        // });
+        // if (Array.isArray(selected)) {
+        // // user selected multiple files
+        // } else if (selected === null) {
+        // // user cancelled the selection
+        // } else {
+        // // user selected a single file
+        // }
         invoke('my_custom_command');
     }
 
