@@ -13,10 +13,13 @@ Scapes is a tool designed to speed up sound design. It aims to offer a convenien
 - [x] Simple and fast way to search and preview sounds
 - [ ] DAW integrations
    - [X] Pro Tools
+   - [X] Reaper
+   - [ ] Nuendo
 - [ ] Manage local sound libraries
 - [ ] Metadata
    - [X] Extraction
    - [ ] Editing
+- [ ] Tools for quick editing / Basic CLI Interface for repetitive tasks
 - [ ] Search and preview sounds from multiple libraries
 - [ ] Integration with multiple sound libraries and sound libraries APIs
 - [ ] Automate repetitive tasks in sound design
