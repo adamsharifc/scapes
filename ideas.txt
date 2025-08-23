@@ -1,8 +1,0 @@
-Database/search 
-- meillisearch milli
-- txtai
-- sqlite-vss
-- two separate databases one for persistent storage and one for searching 
-- https://dadroit.com/blog/json-querying/
-- https://dadroit.com/blog/sqlite-json/
-- use sqlite for json storage and search
