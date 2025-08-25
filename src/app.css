@@ -1,31 +1,8 @@
 :root{
-	--std-black: #101418;
-	--std-matte: #272b2f;
-	--std-gray: #004c99;
-	--std-orange: #0073e6;
-	--std-less-white: #dfe3e66d;
-	--std-white: #f3f6f9;
-	--primary-font: 'Hanken Grotesk', sans-serif;
-	--container-padding: 1rem;
 
-	--std-white: #fbfff4;
-	--std-black: #191B14;
-	--std-red: #EB5353;
-	--std-yellow: #F9D923;
-	--std-green: #36AE7C;
-	--std-gray: #f3f3f3;
-	--std-gray-dark: #333333;
-	--std-logo: #1d3557;
 	--protools-color: #7C24E4;
 	--reaper-color: #3B7C2C;
-
-	--shade-0: #061522;
-
-	--white: #f3f6f9;
 	
-	--font-sans: 'Hanken Grotesk', sans-serif;
-	--font-mono: 'PT Mono', monospace;
-	--font-mono-letter-spacing: 0.05rem;
 	--size-0-5: 0.125rem;
 	--size-1: 0.25rem;
 	--size-2: 0.5rem;
@@ -48,26 +25,38 @@
 	--size-15: 40rem;
 	--size-16: 48rem;
 
-	--opacity-0: rgba(255, 255, 255, 0.03125);
-	--opacity-1: rgba(255, 255, 255, 0.0625);
-	--opacity-2: rgba(255, 255, 255, 0.125);
-	--opacity-3: rgba(255, 255, 255, 0.1875);
-	--opacity-4: rgba(255, 255, 255, 0.25);
-	--opacity-5: rgba(255, 255, 255, 0.375);
-	--opacity-6: rgba(255, 255, 255, 0.5);
-	--opacity-7: rgba(255, 255, 255, 0.625);
-	--opacity-8: rgba(255, 255, 255, 0.75);
-	--opacity-9: rgba(255, 255, 255, 0.875);
-	--opacity-10: rgba(255, 255, 255, 0.9375);
-
+	--container-padding: 1rem;
 	--resizer-width: 0.4rem;
 
+	/* NEW Typography */
+	--font-sans: 'Host Grotesk', 'Arial', sans-serif;
+	--font-mono: 'Geist Mono', 'Courier New', monospace;
+
+	--font-primary: var(--font-sans);
+
+
+	/* NEW Pallete */
+	--gray-1: #FCFCFC;
+	--gray-12: #202020;
+
+
+	--bg: var(--gray-1);
+	--text: var(--gray-12);
 }
+
+*{
+	overscroll-behavior: none;
+}
+
 body{
 	margin: 0;
 	padding: 0;
-	font-family: var(--primary-font);
+	font-family: var(--font-primary);
+	background-color: var(--bg);
+	color: var(--text);
+	box-sizing: border-box;
 }
+
 *::-webkit-scrollbar {
 	width: 8px !important;
 }
@@ -84,19 +73,7 @@ body{
 }
 
 
-*{
-	overscroll-behavior: none;
-}
 
-button{
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
 
 /* FONTS */
 

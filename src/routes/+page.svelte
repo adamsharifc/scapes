@@ -4,7 +4,7 @@
 
 <div class="container">
     <h1>
-        Hello, world
+        Scapes
     </h1>
 </div>
 
@@ -13,9 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    margin: 0;
-    color: black;
+    align-items: flex-start;
     box-sizing: border-box;
     border: 2px solid red;
 }
