@@ -8,8 +8,8 @@
     import ZoomPlugin from 'wavesurfer.js/dist/plugins/zoom.esm.js';
 
     import { onMount } from 'svelte';
-    import { BaseDirectory } from '@tauri-apps/api/fs';
-    import { convertFileSrc } from '@tauri-apps/api/tauri';
+    // import { BaseDirectory } from '@tauri-apps/api/fs';
+    // import { convertFileSrc } from '@tauri-apps/api/tauri';
     const opacity_9 = "rgba(255, 255, 255, 0.875)";  // --opacity-9 from the theme
     const opacity_7 = "rgba(255, 255, 255, 0.625)";  // --opacity-7 frpm the theme
     const opacity_4 = "rgba(255, 255, 255, 0.25)";   // --opacity-4 from the theme
