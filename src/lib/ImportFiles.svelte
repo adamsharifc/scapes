@@ -1,6 +1,6 @@
 <script>
 //    import { open } from '@tauri-apps/api/dialog';
-   import PhFolders from '../assets/icons/PhFolders.svelte';
+   import Folders from '../assets/icons/Folders.svelte';
    import { invoke } from '@tauri-apps/api/tauri';
     // Open a selection dialog for image files
     
@@ -30,7 +30,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="container" on:click={openFolderDialog}>
-    <PhFolders/>
+    <Folders/>
     <span class="text-container">Import Files</span>
 </div>
 

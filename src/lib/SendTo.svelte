@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy } from "svelte";
-    import PhProtools from "../assets/icons/PhProtools.svelte";
-    import PhReaper from "../assets/icons/PhReaper.svelte";
+    import Protools from "../assets/icons/Protools.svelte";
+    import Reaper from "../assets/icons/Reaper.svelte";
     import { invoke } from '@tauri-apps/api/tauri';
 
     let intervalID;
@@ -26,11 +26,11 @@
 
 <div class="container">
     <button class="pill">
-        <PhProtools fill="#ffffff" />
+        <Protools fill="#ffffff" />
         <span>Pro Tools</span>
     </button>
     <button class="pill">
-        <PhReaper fillPrimary="#ffffff" fillSecondary="#061522"/> 
+        <Reaper fillPrimary="#ffffff" fillSecondary="#061522"/> 
         <span>Reaper</span>
     </button>
 </div>

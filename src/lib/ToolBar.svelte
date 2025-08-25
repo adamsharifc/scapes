@@ -1,6 +1,6 @@
 <script>
-import PhProtools from "../assets/icons/PhProtools.svelte";
-import PhReaper from "../assets/icons/PhReaper.svelte";
+import Protools from "../assets/icons/Protools.svelte";
+import Reaper from "../assets/icons/Reaper.svelte";
 import SendTo from "./SendTo.svelte";
 
 </script>

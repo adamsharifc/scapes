@@ -1,101 +1,123 @@
-
 :root{
-  --std-black: #101418;
-  --std-matte: #272b2f;
-  --std-gray: #004c99;
-  --std-orange: #0073e6;
-  --std-less-white: #dfe3e66d;
-  --std-white: #f3f6f9;
-  --primary-font: 'Hanken Grotesk', sans-serif;
-  --container-padding: 1rem;
+	--std-black: #101418;
+	--std-matte: #272b2f;
+	--std-gray: #004c99;
+	--std-orange: #0073e6;
+	--std-less-white: #dfe3e66d;
+	--std-white: #f3f6f9;
+	--primary-font: 'Hanken Grotesk', sans-serif;
+	--container-padding: 1rem;
 
-  --std-white: #fbfff4;
-  --std-black: #191B14;
-  --std-red: #EB5353;
-  --std-yellow: #F9D923;
-  --std-green: #36AE7C;
-  --std-gray: #f3f3f3;
-  --std-gray-dark: #333333;
-  --std-logo: #1d3557;
-  --protools-color: #7C24E4;
-  --reaper-color: #3B7C2C;
+	--std-white: #fbfff4;
+	--std-black: #191B14;
+	--std-red: #EB5353;
+	--std-yellow: #F9D923;
+	--std-green: #36AE7C;
+	--std-gray: #f3f3f3;
+	--std-gray-dark: #333333;
+	--std-logo: #1d3557;
+	--protools-color: #7C24E4;
+	--reaper-color: #3B7C2C;
 
-  --shade-0: #061522;
+	--shade-0: #061522;
 
-  --white: #f3f6f9;
-  
-  --font-sans: 'Hanken Grotesk', sans-serif;
-  --font-mono: 'PT Mono', monospace;
-  --font-mono-letter-spacing: 0.05rem;
-  --size-0-5: 0.125rem;
-  --size-1: 0.25rem;
-  --size-2: 0.5rem;
-  --size-3: 0.75rem;
-  --size-3-5: 0.875rem;
-  --size-4: 1rem;
-  --size-4-5: 1.25rem;
-  --size-5: 1.5rem;
-  --size-5-2-5: 1.625rem;
-  --size-6: 2rem;
-  --size-6-2-5: 2.25rem;
-  --size-7: 3rem;
-  --size-8: 4rem;
-  --size-9: 6rem;
-  --size-10: 8rem;
-  --size-11: 12rem;
-  --size-12: 16rem;
-  --size-13: 24rem;
-  --size-14: 32rem;
-  --size-15: 40rem;
-  --size-16: 48rem;
+	--white: #f3f6f9;
+	
+	--font-sans: 'Hanken Grotesk', sans-serif;
+	--font-mono: 'PT Mono', monospace;
+	--font-mono-letter-spacing: 0.05rem;
+	--size-0-5: 0.125rem;
+	--size-1: 0.25rem;
+	--size-2: 0.5rem;
+	--size-3: 0.75rem;
+	--size-3-5: 0.875rem;
+	--size-4: 1rem;
+	--size-4-5: 1.25rem;
+	--size-5: 1.5rem;
+	--size-5-2-5: 1.625rem;
+	--size-6: 2rem;
+	--size-6-2-5: 2.25rem;
+	--size-7: 3rem;
+	--size-8: 4rem;
+	--size-9: 6rem;
+	--size-10: 8rem;
+	--size-11: 12rem;
+	--size-12: 16rem;
+	--size-13: 24rem;
+	--size-14: 32rem;
+	--size-15: 40rem;
+	--size-16: 48rem;
 
-  --opacity-0: rgba(255, 255, 255, 0.03125);
-  --opacity-1: rgba(255, 255, 255, 0.0625);
-  --opacity-2: rgba(255, 255, 255, 0.125);
-  --opacity-3: rgba(255, 255, 255, 0.1875);
-  --opacity-4: rgba(255, 255, 255, 0.25);
-  --opacity-5: rgba(255, 255, 255, 0.375);
-  --opacity-6: rgba(255, 255, 255, 0.5);
-  --opacity-7: rgba(255, 255, 255, 0.625);
-  --opacity-8: rgba(255, 255, 255, 0.75);
-  --opacity-9: rgba(255, 255, 255, 0.875);
-  --opacity-10: rgba(255, 255, 255, 0.9375);
+	--opacity-0: rgba(255, 255, 255, 0.03125);
+	--opacity-1: rgba(255, 255, 255, 0.0625);
+	--opacity-2: rgba(255, 255, 255, 0.125);
+	--opacity-3: rgba(255, 255, 255, 0.1875);
+	--opacity-4: rgba(255, 255, 255, 0.25);
+	--opacity-5: rgba(255, 255, 255, 0.375);
+	--opacity-6: rgba(255, 255, 255, 0.5);
+	--opacity-7: rgba(255, 255, 255, 0.625);
+	--opacity-8: rgba(255, 255, 255, 0.75);
+	--opacity-9: rgba(255, 255, 255, 0.875);
+	--opacity-10: rgba(255, 255, 255, 0.9375);
 
-  --resizer-width: 0.4rem;
+	--resizer-width: 0.4rem;
 
 }
 body{
-  margin: 0;
-  padding: 0;
-  font-family: var(--primary-font);
-  
+	margin: 0;
+	padding: 0;
+	font-family: var(--primary-font);
 }
 *::-webkit-scrollbar {
-  width: 8px !important;
+	width: 8px !important;
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--std-matte);
+	background: var(--std-matte);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: var(--std-white);
-  border: 2px solid transparent;
+	background-color: var(--std-white);
+	border: 2px solid transparent;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--std-orange);
+	background-color: var(--std-orange);
 }
 
 
 *{
-  overscroll-behavior: none;
+	overscroll-behavior: none;
 }
 
 button{
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+/* FONTS */
+
+@font-face {
+    font-family: 'Host Grotesk';
+    src: url("./assets/fonts/HostGrotesk-VariableFont_wght.woff2") format('woff2');
+    font-style: normal;
+    font-weight: 300 800;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Host Grotesk';
+    src: url("./assets/fonts/HostGrotesk-Italic-VariableFont_wght.woff2") format('woff2');
+    font-style: italic;
+    font-weight: 300 800;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Geist Mono';
+    src: url('./assets/fonts/GeistMono-VariableFont_wght.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 100 900;
+	font-display: swap;
 }

@@ -1,7 +1,7 @@
 <script>
 
-  import PhMagnifyingGlassFill from "../assets/icons/PhMagnifyingGlassFill.svelte";
-  import PhMagnifyingGlass from "../assets/icons/PhMagnifyingGlass.svelte";
+  import MagnifyingGlassFill from "../assets/icons/MagnifyingGlassFill.svelte";
+  import MagnifyingGlass from "../assets/icons/MagnifyingGlass.svelte";
 
   let inputElement;
   let isFocused = false;
@@ -21,9 +21,9 @@
 <div class="container">
   <input type="search" placeholder="Search"   name="" id="" class="inputElement" bind:this={inputElement} tabindex="0" on:focus={onFocus} on:blur={onBlur}>
   {#if isFocused}
-    <PhMagnifyingGlassFill fill="var(--white)" />
+    <MagnifyingGlassFill fill="var(--white)" />
   {:else}
-    <PhMagnifyingGlass fill="var(--white)" />
+    <MagnifyingGlass fill="var(--white)" />
   {/if}
 
 </div>

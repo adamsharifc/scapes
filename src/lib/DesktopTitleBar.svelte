@@ -2,13 +2,13 @@
 import { appWindow } from '@tauri-apps/api/window';
 import { onMount } from 'svelte';
 
-import PhWaveform from '../assets/icons/PhWaveform.svelte';
-import PhMinusBold from '../assets/icons/PhMinusBold.svelte';
-import PhSquareBold from '../assets/icons/PhSquareBold.svelte';
-import PhXBold from '../assets/icons/PhXBold.svelte';
-import PhPrimarySideBar from '../assets/icons/PhPrimarySideBar.svelte';
-import PhPanel from '../assets/icons/PhPanel.svelte';
-import PhSecondarySideBar from '../assets/icons/PhSecondarySideBar.svelte';
+import Waveform from '../assets/icons/Waveform.svelte';
+import MinusBold from '../assets/icons/MinusBold.svelte';
+import SquareBold from '../assets/icons/SquareBold.svelte';
+import XBold from '../assets/icons/XBold.svelte';
+import PrimarySideBar from '../assets/icons/PrimarySideBar.svelte';
+import Panel from '../assets/icons/Panel.svelte';
+import SecondarySideBar from '../assets/icons/SecondarySideBar.svelte';
 import SearchBar from './SearchBar.svelte';
 
 onMount(()=> {
@@ -22,7 +22,7 @@ onMount(()=> {
 <div data-tauri-drag-region class="titlebar">
 
     <div data-tauri-drag-region class="titlebar-title">
-        <PhWaveform fill="white" />
+        <Waveform fill="white" />
         scapes
     </div>
 
@@ -32,27 +32,27 @@ onMount(()=> {
 
     <div data-tauri-drag-region class="titlebar-buttons">
         <div class="titlebar-panel-button">
-            <PhPrimarySideBar fill="white" />
+            <PrimarySideBar fill="white" />
         </div>
 
         <div class="titlebar-panel-button">
-            <PhSecondarySideBar fill="white" />
+            <SecondarySideBar fill="white" />
         </div>
 
         <div class="titlebar-panel-button">
-            <PhPanel fill="white" />
+            <Panel fill="white" />
         </div>
 
         <div style="padding-left: var(--size-2); display: inline-flex; "></div>
 
         <div class="titlebar-button" id="titlebar-minimize">
-            <PhMinusBold fill="white" />
+            <MinusBold fill="white" />
         </div>
         <div class="titlebar-button" id="titlebar-maximize">
-            <PhSquareBold fill="white" />
+            <SquareBold fill="white" />
         </div>
         <div class="titlebar-button" id="titlebar-close">
-            <PhXBold fill="white" />
+            <XBold fill="white" />
         </div>
     </div>
 </div>
