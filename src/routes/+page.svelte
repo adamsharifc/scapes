@@ -3,7 +3,7 @@
 </script>
 
 <div class="container">
-    <TitleBar />
+    <!-- <TitleBar /> -->
 </div>
 
 <style>

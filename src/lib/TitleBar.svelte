@@ -1,13 +1,11 @@
 <script>
 
 	import Scribble from '../assets/icons/Scribble.svelte';
-	import MinusBold from '../assets/icons/MinusBold.svelte';
-	import SquareBold from '../assets/icons/SquareBold.svelte';
-	import XBold from '../assets/icons/XBold.svelte';
-	import PrimarySideBar from '../assets/icons/PrimarySideBar.svelte';
-	import Panel from '../assets/icons/Panel.svelte';
-	import SecondarySideBar from '../assets/icons/SecondarySideBar.svelte';
+	import Minus from '../assets/icons/Minus.svelte';
+	import Square from '../assets/icons/Square.svelte';
+	import X from '../assets/icons/X.svelte';
 	import SearchBar from './SearchBar.svelte';
+	import LayoutControls from './LayoutControls.svelte';
 
 	// Read build platform from Vite-injected env (from .env at project root)
 	// Values: "windows", "macos", "linux"
@@ -18,7 +16,7 @@
 <div class="titlebar" data-build-platform={buildPlatform}>
 
 	<div class="titlebar-title">
-		<Scribble fill="var(--fg)" />
+		<Scribble fill="var(--fg)" size={"var(--size-6)"} />
 		&nbsp; scapes
 	</div>
 
@@ -27,28 +25,18 @@
 	</div>
 
 	<div class="titlebar-buttons">
-		<div class="titlebar-panel-button">
-			<PrimarySideBar fill="var(--fg)" />
-		</div>
-
-		<div class="titlebar-panel-button">
-			<SecondarySideBar fill="var(--fg)" />
-		</div>
-
-		<div class="titlebar-panel-button">
-			<Panel fill="var(--fg)" />
-		</div>
+		<LayoutControls />
 
 		<div style="padding-left: var(--size-2); display: inline-flex; "></div>
 
 		<div class="titlebar-button" id="titlebar-minimize">
-			<MinusBold fill="var(--fg)" />
+			<Minus fill="var(--fg)" size={"var(--size-4-5)"} />
 		</div>
 		<div class="titlebar-button" id="titlebar-maximize">
-			<SquareBold fill="var(--fg)" />
+			<Square fill="var(--fg)" size={"var(--size-4-5)"} />
 		</div>
 		<div class="titlebar-button" id="titlebar-close">
-			<XBold fill="var(--fg)" />
+			<X fill="var(--fg)" size={"var(--size-4-5)"} />
 		</div>
 	</div>
 </div>
@@ -57,20 +45,20 @@
 <style>
 
 .titlebar {
-	background: transparent;
-	user-select: none;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	align-items: center;
-	flex-wrap: nowrap;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	max-height: var(--size-6);
-	box-sizing: border-box;
-	width: 100%;
-	height: 100%;
+    background: transparent;
+    user-select: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    flex-wrap: nowrap;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 1000;
+    border: 1px solid red;
+    padding: var(--size-1) 0;
 }
 .titlebar-button {
 	display: inline-flex;
