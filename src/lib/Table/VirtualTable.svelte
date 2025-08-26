@@ -46,6 +46,14 @@
   /** Minimum column width in pixels */
   const MIN_PX = 50;
 
+  // Selection state
+  /** @type {Set<string|number>} - Selected row IDs */
+  let selectedRows = $state(new Set());
+  /** @type {string|number|null} - Last selected row for shift selection */
+  let lastSelectedRow = $state(null);
+  /** @type {boolean} - Detect if we're on macOS */
+  const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+
   // Calculate total table width
   const totalTableWidth = $derived(() => {
     return columns
@@ -279,6 +287,107 @@
     return index < columns.length - 1;
   }
 
+  // Row selection functions
+  
+  /**
+   * Handle row click with modifier keys for selection
+   * @param {MouseEvent} event
+   * @param {any} item
+   */
+  function handleRowClick(event, item) {
+    const rowId = g(item, 'id');
+    const isCtrlOrCmd = isMac ? event.metaKey : event.ctrlKey;
+    const isShift = event.shiftKey;
+    
+    if (isShift && lastSelectedRow !== null) {
+      // Shift+Click: Range selection
+      selectRowRange(lastSelectedRow, rowId);
+    } else if (isCtrlOrCmd) {
+      // Ctrl/Cmd+Click: Toggle selection
+      toggleRowSelection(rowId);
+    } else {
+      // Normal click: Single selection
+      selectSingleRow(rowId);
+    }
+  }
+
+  /**
+   * Select a single row, clearing all others
+   * @param {string|number} rowId
+   */
+  function selectSingleRow(rowId) {
+    selectedRows = new Set([rowId]);
+    lastSelectedRow = rowId;
+  }
+
+  /**
+   * Toggle selection of a single row
+   * @param {string|number} rowId
+   */
+  function toggleRowSelection(rowId) {
+    const newSelection = new Set(selectedRows);
+    if (newSelection.has(rowId)) {
+      newSelection.delete(rowId);
+      lastSelectedRow = newSelection.size > 0 ? rowId : null;
+    } else {
+      newSelection.add(rowId);
+      lastSelectedRow = rowId;
+    }
+    selectedRows = newSelection;
+  }
+
+  /**
+   * Select range of rows between two row IDs
+   * @param {string|number} startRowId
+   * @param {string|number} endRowId
+   */
+  function selectRowRange(startRowId, endRowId) {
+    // Find indices of start and end rows in the full items array
+    const startIndex = items.findIndex(item => g(item, 'id') === startRowId);
+    const endIndex = items.findIndex(item => g(item, 'id') === endRowId);
+    
+    if (startIndex === -1 || endIndex === -1) return;
+    
+    // Determine range boundaries
+    const minIndex = Math.min(startIndex, endIndex);
+    const maxIndex = Math.max(startIndex, endIndex);
+    
+    // Select all rows in the range
+    const newSelection = new Set(selectedRows);
+    for (let i = minIndex; i <= maxIndex; i++) {
+      const rowId = g(items[i], 'id');
+      newSelection.add(rowId);
+    }
+    
+    selectedRows = newSelection;
+    lastSelectedRow = endRowId;
+  }
+
+  /**
+   * Clear all row selections
+   */
+  function clearSelection() {
+    selectedRows = new Set();
+    lastSelectedRow = null;
+  }
+
+  /**
+   * Check if a row is selected
+   * @param {any} item
+   * @returns {boolean}
+   */
+  function isRowSelected(item) {
+    return selectedRows.has(g(item, 'id'));
+  }
+
+  /**
+   * Get count of selected rows
+   * @returns {number}
+   */
+  function getSelectedCount() {
+    return selectedRows.size;
+  }
+
   /**
    * Safely handle checkbox change events from the control panel
    * @param {number} index
@@ -359,6 +468,16 @@
     {/each}
     <button class="show-all" onclick={() => columns = columns.map(c => ({ ...c, visible: true }))}>Show all</button>
   </div>
+  <div class="selection-info">
+    {#if getSelectedCount() > 0}
+      <span class="selected-count">{getSelectedCount()} row{getSelectedCount() === 1 ? '' : 's'} selected</span>
+      <button class="clear-selection" onclick={clearSelection}>Clear Selection</button>
+    {:else}
+      <span class="selection-hint">
+        Click to select • {isMac ? 'Cmd' : 'Ctrl'}+Click to multi-select • Shift+Click for range
+      </span>
+    {/if}
+  </div>
   <div class="debug-info">
     Total table width: {totalTableWidth()}px
   </div>
@@ -410,7 +529,13 @@
         </tr>
       {/if}
       {#each visibleItems() as item (g(item, 'id'))}
-        <tr style="height: {itemHeight}px;">
+        <tr 
+          style="height: {itemHeight}px;" 
+          class:selected={isRowSelected(item)}
+          onclick={(e) => handleRowClick(e, item)}
+          aria-selected={isRowSelected(item)}
+          tabindex="0"
+        >
           {#each columns as col, i}
             {#if col.visible !== false}
               <td 
@@ -569,6 +694,25 @@
     background-color: #f8f9fa;
   }
 
+  .sticky-table tbody tr.selected {
+    background-color: #e3f2fd !important;
+    border-left: 3px solid #2196f3;
+  }
+
+  .sticky-table tbody tr.selected:hover {
+    background-color: #bbdefb !important;
+  }
+
+  .sticky-table tbody tr {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sticky-table tbody tr:focus {
+    outline: 2px solid #2196f3;
+    outline-offset: -2px;
+  }
+
   /* Resizer handle styles */
   .resizable-header {
     position: relative;
@@ -650,6 +794,41 @@
     border: 1px solid #ddd;
     background: white;
     cursor: pointer;
+  }
+
+  .selection-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: white;
+    border: 1px solid #ddd;
+  }
+
+  .selected-count {
+    font-weight: 600;
+    color: #2196f3;
+  }
+
+  .selection-hint {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+  }
+
+  .clear-selection {
+    background: #ff5722;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .clear-selection:hover {
+    background: #e64a19;
   }
 
   /* Invisible anchor used for popper reference */
