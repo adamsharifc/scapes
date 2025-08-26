@@ -226,6 +226,60 @@
   }
 
   /**
+   * Move column left in the order
+   * @param {number} index
+   */
+  function moveColumnLeft(index) {
+    if (index <= 0) return; // Can't move first column left
+    
+    const newColumns = [...columns];
+    const temp = newColumns[index];
+    newColumns[index] = newColumns[index - 1];
+    newColumns[index - 1] = temp;
+    columns = newColumns;
+    
+    // Update context menu index to follow the moved column
+    contextColumnIndex = index - 1;
+    closeContextMenu();
+  }
+
+  /**
+   * Move column right in the order
+   * @param {number} index
+   */
+  function moveColumnRight(index) {
+    if (index >= columns.length - 1) return; // Can't move last column right
+    
+    const newColumns = [...columns];
+    const temp = newColumns[index];
+    newColumns[index] = newColumns[index + 1];
+    newColumns[index + 1] = temp;
+    columns = newColumns;
+    
+    // Update context menu index to follow the moved column
+    contextColumnIndex = index + 1;
+    closeContextMenu();
+  }
+
+  /**
+   * Check if column can move left
+   * @param {number} index
+   * @returns {boolean}
+   */
+  function canMoveLeft(index) {
+    return index > 0;
+  }
+
+  /**
+   * Check if column can move right
+   * @param {number} index
+   * @returns {boolean}
+   */
+  function canMoveRight(index) {
+    return index < columns.length - 1;
+  }
+
+  /**
    * Safely handle checkbox change events from the control panel
    * @param {number} index
    * @param {Event} e
@@ -381,6 +435,21 @@
         {columns[contextColumnIndex] && columns[contextColumnIndex].visible !== false ? 'Hide' : 'Show'} {columns[contextColumnIndex] && columns[contextColumnIndex].label}
       </button>
       <hr />
+      <!-- Column Reordering -->
+      {#if canMoveLeft(contextColumnIndex)}
+        <button role="menuitem" onclick={() => moveColumnLeft(contextColumnIndex)}>
+          Move Left
+        </button>
+      {/if}
+      {#if canMoveRight(contextColumnIndex)}
+        <button role="menuitem" onclick={() => moveColumnRight(contextColumnIndex)}>
+          Move Right
+        </button>
+      {/if}
+      {#if canMoveLeft(contextColumnIndex) || canMoveRight(contextColumnIndex)}
+        <hr />
+      {/if}
+      <!-- Sticky Column Controls -->
       <button role="menuitem" onclick={() => setColumnSticky(contextColumnIndex, 'left')}>
         Pin to Left
       </button>
