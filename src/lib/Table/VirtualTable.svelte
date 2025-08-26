@@ -22,16 +22,16 @@
 
   // Column configuration (pixel widths that can exceed viewport)
   /**
-   * @typedef {{key:string,label:string,width:number,visible?:boolean}} Column
+   * @typedef {{key:string,label:string,width:number,visible?:boolean,sticky?:'left'|'right'|null}} Column
    */
   /** @type {Column[]} */
   let columns = $state([
-    { key: 'id', label: 'ID', width: 150, visible: true },
-    { key: 'first_name', label: 'First Name', width: 300, visible: true },
-    { key: 'last_name', label: 'Last Name', width: 300, visible: true },
-    { key: 'email', label: 'Email', width: 400, visible: true },
-    { key: 'gender', label: 'Gender', width: 200, visible: true },
-    { key: 'ip_address', label: 'IP Address', width: 250, visible: true }
+    { key: 'id', label: 'ID', width: 150, visible: true, sticky: null },
+    { key: 'first_name', label: 'First Name', width: 300, visible: true, sticky: null },
+    { key: 'last_name', label: 'Last Name', width: 300, visible: true, sticky: null },
+    { key: 'email', label: 'Email', width: 400, visible: true, sticky: null },
+    { key: 'gender', label: 'Gender', width: 200, visible: true, sticky: null },
+    { key: 'ip_address', label: 'IP Address', width: 250, visible: true, sticky: null }
   ]);
 
   // Resizing state
@@ -52,6 +52,50 @@
       .filter(col => col.visible !== false)
       .reduce((sum, col) => sum + col.width, 0);
   });
+
+  /**
+   * Get the style for sticky positioning
+   * @param {Column} col
+   * @param {number} index
+   * @param {boolean} isHeader
+   * @returns {string}
+   */
+  function getStickyStyle(col, index, isHeader = false) {
+    let styles = [];
+    
+    // Headers always need top: 0 for vertical sticking
+    if (isHeader) {
+      styles.push('top: 0');
+    }
+    
+    // Handle horizontal sticking for both headers and body cells
+    if (col.sticky) {
+      let offset = 0;
+      const visibleColumns = columns.filter(c => c.visible !== false);
+      
+      if (col.sticky === 'left') {
+        // Calculate left offset for this column
+        for (let i = 0; i < visibleColumns.length; i++) {
+          if (visibleColumns[i] === col) break;
+          if (visibleColumns[i].sticky === 'left') {
+            offset += visibleColumns[i].width;
+          }
+        }
+        styles.push(`left: ${offset}px`);
+      } else if (col.sticky === 'right') {
+        // Calculate right offset for this column  
+        for (let i = visibleColumns.length - 1; i >= 0; i--) {
+          if (visibleColumns[i] === col) break;
+          if (visibleColumns[i].sticky === 'right') {
+            offset += visibleColumns[i].width;
+          }
+        }
+        styles.push(`right: ${offset}px`);
+      }
+    }
+    
+    return styles.length > 0 ? styles.join('; ') : '';
+  }
 
   /**
    * Start resizing a column (pointerdown on the resizer)
@@ -173,6 +217,15 @@
   }
 
   /**
+   * Toggle sticky position for a column
+   * @param {number} index
+   * @param {'left'|'right'|null} position
+   */
+  function setColumnSticky(index, position) {
+    columns = columns.map((c, i) => i === index ? { ...c, sticky: position } : c);
+  }
+
+  /**
    * Safely handle checkbox change events from the control panel
    * @param {number} index
    * @param {Event} e
@@ -261,8 +314,8 @@
 <div bind:this={virtualAnchor} use:referenceAction class="virtual-anchor" aria-hidden="true" style="display:none; position:absolute; left:-9999px; top:-9999px; width:0; height:0;"></div>
 
 <div class="virtual-table-container" bind:this={scrollContainer} onscroll={handleScroll}>
-  <!-- Single table with sticky header - let the container handle all scrolling -->
-  <table class="full-table" style="width: {totalTableWidth()}px;">
+  <!-- Single table with CSS sticky columns -->
+  <table class="sticky-table" style="width: {totalTableWidth()}px;">
     <colgroup>
       {#each columns as col}
         {#if col.visible !== false}
@@ -276,7 +329,13 @@
       <tr>
         {#each columns as col, i}
           {#if col.visible !== false}
-            <th class="resizable-header" oncontextmenu={(e) => openContextMenu(i, e)}>
+            <th 
+              class="resizable-header" 
+              class:sticky-left={col.sticky === 'left'}
+              class:sticky-right={col.sticky === 'right'}
+              style={getStickyStyle(col, i, true)}
+              oncontextmenu={(e) => openContextMenu(i, e)}
+            >
               <button onclick={() => sortBy(col.key)}>{col.label} {getSortIndicator(col.key)}</button>
               <div class="col-resizer" role="separator" aria-orientation="vertical" tabindex="-1" onpointerdown={(e) => startResize(i, e)}></div>
             </th>
@@ -286,13 +345,27 @@
     </thead>
     
     <!-- Scrollable body content with virtualization -->
-    <tbody class="table-body" style="height: {totalHeight()}px; position: relative;">
-      <tr class="spacer-row" style="height: {offsetY()}px;"><td colspan="999"></td></tr>
-      {#each visibleItems() as item (g(item, 'id'))}
-        <tr style="height: {itemHeight}px;">
+    <tbody class="table-body">
+      {#if offsetY() > 0}
+        <tr class="spacer-row" style="height: {offsetY()}px;">
           {#each columns as col}
             {#if col.visible !== false}
-              <td>{g(item, col.key)}</td>
+              <td></td>
+            {/if}
+          {/each}
+        </tr>
+      {/if}
+      {#each visibleItems() as item (g(item, 'id'))}
+        <tr style="height: {itemHeight}px;">
+          {#each columns as col, i}
+            {#if col.visible !== false}
+              <td 
+                class:sticky-left={col.sticky === 'left'}
+                class:sticky-right={col.sticky === 'right'}
+                style={getStickyStyle(col, i)}
+              >
+                {g(item, col.key)}
+              </td>
             {/if}
           {/each}
         </tr>
@@ -307,6 +380,19 @@
       <button role="menuitem" onclick={() => toggleColumnVisibility(contextColumnIndex)}>
         {columns[contextColumnIndex] && columns[contextColumnIndex].visible !== false ? 'Hide' : 'Show'} {columns[contextColumnIndex] && columns[contextColumnIndex].label}
       </button>
+      <hr />
+      <button role="menuitem" onclick={() => setColumnSticky(contextColumnIndex, 'left')}>
+        Pin to Left
+      </button>
+      <button role="menuitem" onclick={() => setColumnSticky(contextColumnIndex, 'right')}>
+        Pin to Right
+      </button>
+      {#if columns[contextColumnIndex] && columns[contextColumnIndex].sticky}
+        <button role="menuitem" onclick={() => setColumnSticky(contextColumnIndex, null)}>
+          Unpin Column
+        </button>
+      {/if}
+      <hr />
       <button role="menuitem" onclick={closeContextMenu}>Close</button>
     </div>
   </div>
@@ -320,25 +406,49 @@
     border: 1px solid #ddd;
     position: relative;
     box-sizing: border-box;
-    max-width: none; /* Ensure no max-width constraints */
   }
 
-  .full-table {
+  .sticky-table {
     border-collapse: collapse;
     table-layout: fixed;
     width: auto; /* Allow table to size based on column widths */
   }
 
   .table-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    /* Remove sticky positioning from thead - individual th elements will handle it */
     background: white;
     border-bottom: 2px solid #ddd;
   }
 
+  .table-header th {
+    /* All header cells are sticky vertically, some also horizontally */
+    position: sticky;
+    background: white;
+    z-index: 10;
+  }
+
   .table-body {
-    /* Body styling will be handled by individual rows */
+    /* Remove any positioning that could cause gaps */
+  }
+
+  .sticky-left {
+    position: sticky;
+    z-index: 5;
+    background: white;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+  }
+
+  .sticky-right {
+    position: sticky;
+    z-index: 5;
+    background: white;
+    box-shadow: -2px 0 4px rgba(0,0,0,0.1);
+  }
+
+  /* Header sticky columns should be above body sticky columns */
+  .table-header .sticky-left,
+  .table-header .sticky-right {
+    z-index: 15;
   }
 
   .spacer-row {
@@ -350,10 +460,12 @@
     padding: 0;
     border: none;
     height: inherit;
+    border-bottom: none;
+    border-top: none;
   }
 
-  .full-table th,
-  .full-table td {
+  .sticky-table th,
+  .sticky-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -363,12 +475,12 @@
     box-sizing: border-box;
   }
 
-  .full-table th {
+  .sticky-table th {
     background-color: #f2f2f2;
     font-weight: bold;
   }
 
-  .full-table th button {
+  .sticky-table th button {
     background: none;
     border: none;
     font: inherit;
@@ -380,11 +492,11 @@
     font-weight: bold;
   }
 
-  .full-table th button:hover {
+  .sticky-table th button:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  .full-table tbody tr:hover {
+  .sticky-table tbody tr:hover {
     background-color: #f8f9fa;
   }
 
@@ -429,8 +541,10 @@
     background: #f2f2f2;
   }
 
-  .body-table tbody tr:hover {
-    background-color: #f8f9fa;
+  .context-menu hr {
+    margin: 0.25rem 0;
+    border: none;
+    border-top: 1px solid #eee;
   }
 
   /* Portal wrapper should sit above the sticky header */
