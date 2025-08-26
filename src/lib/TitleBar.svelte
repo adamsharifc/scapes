@@ -13,6 +13,7 @@
 
 </script>
 
+{#if buildPlatform === "windows"}
 <div class="titlebar" data-build-platform={buildPlatform}>
 
 	<div class="titlebar-title">
@@ -40,6 +41,12 @@
 		</div>
 	</div>
 </div>
+{:else if buildPlatform === "macos"}
+<div class="titlebar" data-build-platform={buildPlatform}>
+
+
+</div>
+{/if}
 
 
 <style>
