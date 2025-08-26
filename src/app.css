@@ -41,7 +41,7 @@
 
 
 	--bg: var(--gray-1);
-	--text: var(--gray-12);
+	--fg: var(--gray-12);
 }
 
 *{
@@ -58,7 +58,7 @@ html, body {
 body{
 	font-family: var(--font-primary);
 	background-color: var(--bg);
-	color: var(--text);
+	color: var(--fg);
 }
 
 *::-webkit-scrollbar {

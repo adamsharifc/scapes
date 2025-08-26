@@ -1,11 +1,9 @@
 <script>
-
+    import TitleBar from "$lib/TitleBar.svelte";
 </script>
 
 <div class="container">
-    <h1>
-        Scapes
-    </h1>
+    <TitleBar />
 </div>
 
 <style>
@@ -15,6 +13,5 @@
     justify-content: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
-    border: 2px solid red;
 }
 </style>
