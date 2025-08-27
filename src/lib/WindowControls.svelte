@@ -50,8 +50,8 @@
 {:else if platform === "macos"}
     <div class="macos-controls"
         role="group"
-        onmouseenter={() => (macosHovered = true)}
-        onmouseleave={() => (macosHovered = false)}
+        onmouseenter={() => {macosHovered = true}}
+        onmouseleave={() => {macosHovered = false}}
     >
         <button
             class="macos-button"

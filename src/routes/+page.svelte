@@ -3,8 +3,9 @@
     let appResizable;
 </script>
 
-<div class="container">
     <!-- <AppResizable bind:this={appResizable}/> -->
+<div class="container">
+
 </div>
 
 <style>
@@ -14,10 +15,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
-    width: 100vw;
-	height: calc(100vh - 56px);
-	min-width: 0;
-	min-height: 0;
-	overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: 2px solid green; 
 }
 </style>
