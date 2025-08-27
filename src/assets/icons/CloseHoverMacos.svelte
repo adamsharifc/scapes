@@ -1,16 +1,16 @@
 <script>
 	/**
 	 * @typedef {Object} Props
-	 * @property {string} [dimension]
+	 * @property {string} [size]
 	 */
 
 	/** @type {Props} */
-	let { dimension = "24" } = $props();
+	let { size = "24" } = $props();
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	style="width: {dimension}; height: {dimension};"
+	style="width: {size}; height: {size};"
 	enable-background="new 0 0 85.4 85.4"
 	viewBox="0 0 85.4 85.4"
 >

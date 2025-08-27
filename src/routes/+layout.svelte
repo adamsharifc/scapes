@@ -6,7 +6,3 @@
 
 <TitleBar />
 {@render children()}
-
-<h1>
-    hello
-</h1>

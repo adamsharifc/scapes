@@ -10,10 +10,15 @@
     import MinimizeHoverMacos from '../assets/icons/MinimizeHoverMacos.svelte';
     import MinimizeNormalMacos from '../assets/icons/MinimizeNormalMacos.svelte';
 
-    const buildPlatform = import.meta.env.VITE_BUILD_PLATFORM ?? 'unknown';
+    // Svelte 5 pattern for props
+    /** @type {{ platform?: string }} */
+    let { platform = 'unknown' } = $props();
+
+    // macOS icon hover state for the whole container
+    let macosHovered = $state(false);
 </script>
 
-{#if buildPlatform === "windows"}
+{#if platform === "windows"}
 
     <button 
         class="titlebar-button" 
@@ -42,11 +47,50 @@
         <X fill="var(--fg)" size={"var(--size-4-5)"} />
     </button>
 
-{:else if buildPlatform === "macos"}
+{:else if platform === "macos"}
+    <div class="macos-controls"
+        role="group"
+        onmouseenter={() => (macosHovered = true)}
+        onmouseleave={() => (macosHovered = false)}
+    >
+        <button
+            class="macos-button"
+            title="Close"
+            aria-label="Close"
+        >
+            {#if macosHovered}
+                <CloseHoverMacos size={"var(--size-3-5)"} />
+            {:else}
+                <CloseNormalMacos size={"var(--size-3-5)"} />
+            {/if}
+        </button>
 
+        <button
+            class="macos-button"
+            title="Minimize"
+            aria-label="Minimize"
+        >
+            {#if macosHovered}
+                <MinimizeHoverMacos size={"var(--size-3-5)"} />
+            {:else}
+                <MinimizeNormalMacos size={"var(--size-3-5)"} />
+            {/if}
+        </button>
 
+        <button
+            class="macos-button"
+            title="Maximize"
+            aria-label="Maximize"
+        >
+            {#if macosHovered}
+                <MaximizeHoverMacos size={"var(--size-3-5)"} />
+            {:else}
+                <MaximizeNormalMacos size={"var(--size-3-5)"} />
+            {/if}
+        </button>
+    </div>
 
-{:else if buildPlatform === "linux"}
+{:else if platform === "linux"}
 
 {:else}
 
@@ -75,5 +119,17 @@
 }
 #titlebar-close:hover {
     background: var(--std-red);
+}
+.macos-button{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.macos-controls{
+    display: inline-flex;
 }
 </style>
