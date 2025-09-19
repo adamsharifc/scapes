@@ -7,7 +7,7 @@ license = ""
 repository = "https://github.com/adamsharifc/scapes"
 default-run = "scapes"
 edition = "2021"
-rust-version = "1.89"
+rust-version = "1.90"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -19,16 +19,18 @@ name = "scapes_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2", features = [] }
-cc = "1.0"
+tauri-build = { version = "2.4.1", features = [] }
+cc = "1.2.38"
 
 [dependencies]
-tauri = { version = "2", features = [] }
+tauri = { version = "2.8.5", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-chrono = "0.4.38"
-rusqlite = {version = "*", features = ["bundled"] }
-sha2 = "0.10.8"
+chrono = "0.4.42"
+rusqlite = {version = "0.37.0", features = ["bundled", "serde_json"] }
+sha2 = "0.10.9"
+thiserror = "2.0.16"
+tokio = "1.47.1"
 
 
