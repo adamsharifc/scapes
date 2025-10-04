@@ -1,6 +1,6 @@
 <script>
     import Minus from '../assets/icons/Minus.svelte';
-    import Square from '../assets/icons/Square.svelte';
+    import Rectangle from '../assets/icons/Rectangle.svelte';
     import X from '../assets/icons/X.svelte';
 
     import CloseHoverMacos from '../assets/icons/CloseHoverMacos.svelte';
@@ -35,7 +35,7 @@
         title="Maximize" 
         aria-label="Maximize"
     >
-        <Square fill="var(--fg)" size={"var(--size-4-5)"} />
+        <Rectangle fill="var(--fg)" size={"var(--size-4-5)"} />
     </button>
 
     <button 
