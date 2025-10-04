@@ -50,6 +50,7 @@
     --size-6: 2rem;
     --size-6-2-5: 2.25rem;
     --size-6-5: 2.5rem;
+    --size-6-7-5: 2.75rem;
     --size-7: 3rem;
     --size-7-5: 3.5rem;
     --size-8: 4rem;
@@ -72,7 +73,7 @@
     --size-16-5: 52rem;
 
     /* Important Component Sizes */
-    --titlebar-height: var(--size-6-5);
+    --titlebar-height: var(--size-6-7-5);
 	--resizer-width: var(--size-2);
 
 	/* Typography */

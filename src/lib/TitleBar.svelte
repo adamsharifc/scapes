@@ -1,9 +1,9 @@
 <script>
-
-	import Scribble from '../assets/icons/Scribble.svelte';
 	import SearchBar from './SearchBar.svelte';
 	import LayoutControls from './LayoutControls.svelte';
 	import WindowControls from './WindowControls.svelte';
+	import Logo from './Logo.svelte';
+	import ThemeToggle from './ThemeToggle.svelte';
 
 	// Read build platform from Vite-injected env (from .env at project root)
 	// Values: "windows", "macos", "linux"
@@ -11,92 +11,76 @@
 
 </script>
 
+<div class="titlebar" data-build-platform={buildPlatform}>
 {#if buildPlatform === "windows"}
-<div class="titlebar" data-build-platform={buildPlatform}>
 
-	<div class="titlebar-title">
-		<Scribble fill="var(--fg)" size={"var(--size-6)"} />
-		&nbsp; scapes
+	<div class="left-box">
+		<Logo />
 	</div>
-
-	<div class="search-bar">
+	
+	<div class="center-box">
 		<SearchBar />
 	</div>
 
-	<div class="titlebar-buttons">
+	<div class="right-box">
+		<!-- <ThemeToggle /> -->
 		<LayoutControls />
-
-		<div style="padding-left: var(--size-2); display: inline-flex; "></div>
-
 		<WindowControls platform={buildPlatform} />
 	</div>
-</div>
+
 {:else if buildPlatform === "macos"}
-<div class="titlebar" data-build-platform={buildPlatform}>
-	<div style="display: inline-flex;">
+
+	<div class="left-box">
+		<div class="macos-spacer"></div>
 		<WindowControls platform={buildPlatform} />
-		
-		<div class="titlebar-title">
-			<Scribble fill="var(--fg)" size={"var(--size-6)"} />
-			&nbsp; scapes
-		</div>
+		<Logo />
 	</div>
 
-	<div class="search-bar">
+	<div class="center-box">
 		<SearchBar />
 	</div>
 
-	<div class="titlebar-buttons">
+	<div class="right-box">
 		<LayoutControls />
-
-		<div style="padding-left: var(--size-2); display: inline-flex; "></div>
-
-
+		<div class="macos-spacer"></div>
 	</div>
 
-</div>
 {/if}
-
+</div>
 
 <style>
-
 .titlebar {
-    background: transparent;
-    user-select: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    flex-wrap: nowrap;
-    top: 0;
-    left: 0;
-    right: 0;
-    box-sizing: border-box;
-    width: 100%;
-    z-index: 1000;
-    border: 1px solid red;
-    padding: var(--size-1) 0;
-}
-.titlebar-title{
-	font-size: var(--size-4-5);
-	background-clip: text;
-	font-weight: 700;
-	color: var(--fg);
-	padding-left: var(--size-3);
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0; left: 0; right: 0;
 	box-sizing: border-box;
-	height: 100%;
+	z-index: 2;
+	height: clamp(var(--titlebar-height), var(--titlebar-height), var(--titlebar-height));
+}
+.left-box,
+.center-box,
+.right-box{
 	display: flex;
+	height: 100%;
+	align-items: center;
+	box-sizing: border-box;
+	flex-wrap: nowrap;
+}
+.left-box{
 	justify-content: flex-start;
-	align-items: center;
 }
-.search-bar{
-	align-items:center;
-	justify-content:center;
+.center-box{
+	justify-content: center;
 }
-.titlebar-buttons{
-	display: flex;
+.right-box{
 	justify-content: flex-end;
-	align-items: center;
-	height: 100%;
 }
-
+.macos-spacer{
+	padding-left: var(--size-2);
+	display: inline-flex;
+}
 </style>

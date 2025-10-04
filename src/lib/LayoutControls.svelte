@@ -24,49 +24,28 @@
 </script>
 
 <div class="container">
-
-    <button
-        class="sidebar-toggle-btn"
-        aria-pressed={isSidebarOpen}
-        onclick={toggleSidebar}
-        title="Toggle sidebar"
-    >
+    <button class="btn" aria-pressed={isSidebarOpen} onclick={toggleSidebar} title="Toggle sidebar">
         {#if isSidebarOpen}
             <SidebarSimpleFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
             <SidebarSimple fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
-
     </button>
 
-    <button
-        class="sidebar-toggle-btn"
-        aria-pressed={isSecondarySidebarOpen}
-        onclick={toggleSecondarySidebar}
-        title="Toggle secondary sidebar"
-    >
-
+    <button class="btn" aria-pressed={isSecondarySidebarOpen} onclick={toggleSecondarySidebar} title="Toggle secondary sidebar">
         {#if isSecondarySidebarOpen}
             <SquareHalfFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
             <SquareHalf fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
-
     </button>
 
-    <button
-        class="sidebar-toggle-btn"
-        aria-pressed={isPanelOpen}
-        onclick={togglePanel}
-        title="Toggle panel"
-    >
-
+    <button class="btn" aria-pressed={isPanelOpen} onclick={togglePanel} title="Toggle panel">
         {#if isPanelOpen}
             <SquareHalfBottomFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
             <SquareHalfBottom fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
-
     </button>
 </div>
 
@@ -76,7 +55,7 @@
     height: 100%;
     box-sizing: border-box;
 }
-.sidebar-toggle-btn {
+.btn {
     background: none;
     border: none;
     padding: 0 var(--size-1-5);
@@ -85,5 +64,8 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+}
+.btn:hover {
+    background-color: var(--fg-3);
 }
 </style>
