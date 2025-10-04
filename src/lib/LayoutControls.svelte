@@ -23,7 +23,7 @@
     }
 </script>
 
-<div>
+<div class="container">
 
     <button
         class="sidebar-toggle-btn"
@@ -32,9 +32,9 @@
         title="Toggle sidebar"
     >
         {#if isSidebarOpen}
-            <SidebarSimpleFilled fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SidebarSimpleFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
-            <SidebarSimple fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SidebarSimple fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
 
     </button>
@@ -47,9 +47,9 @@
     >
 
         {#if isSecondarySidebarOpen}
-            <SquareHalfFilled fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SquareHalfFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
-            <SquareHalf fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SquareHalf fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
 
     </button>
@@ -62,22 +62,28 @@
     >
 
         {#if isPanelOpen}
-            <SquareHalfBottomFilled fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SquareHalfBottomFilled fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {:else}
-            <SquareHalfBottom fill="var(--fg)" size={"var(--size-4-5)"} />
+            <SquareHalfBottom fill="var(--fg)" size={"var(--size-4-7-5)"} />
         {/if}
 
     </button>
 </div>
 
 <style>
+.container {
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+}
 .sidebar-toggle-btn {
     background: none;
     border: none;
-    padding: 0.25em;
+    padding: 0 var(--size-1-5);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 </style>

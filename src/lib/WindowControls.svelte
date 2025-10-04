@@ -19,73 +19,40 @@
 </script>
 
 {#if platform === "windows"}
+<div class="windows-controls">
 
-    <button 
-        class="titlebar-button" 
-        id="titlebar-minimize" 
-        title="Minimize" 
-        aria-label="Minimize"
-    >
-        <Minus fill="var(--fg)" size={"var(--size-4-5)"} />
+    <button class="titlebar-button" id="titlebar-minimize" title="Minimize" aria-label="Minimize">
+        <Minus fill="var(--fg)" size={"var(--size-4-2-5)"} />
     </button>
    
-    <button 
-        class="titlebar-button" 
-        id="titlebar-maximize" 
-        title="Maximize" 
-        aria-label="Maximize"
-    >
-        <Rectangle fill="var(--fg)" size={"var(--size-4-5)"} />
+    <button class="titlebar-button" id="titlebar-maximize" title="Maximize" aria-label="Maximize">
+        <Rectangle fill="var(--fg)" size={"var(--size-4-2-5)"} />
     </button>
 
-    <button 
-        class="titlebar-button" 
-        id="titlebar-close" 
-        title="Close" 
-        aria-label="Close"
-    >
-        <X fill="var(--fg)" size={"var(--size-4-5)"} />
+    <button class="titlebar-button" id="titlebar-close" title="Close" aria-label="Close">
+        <X fill="currentColor" size={"var(--size-4-2-5)"} />
     </button>
-
+</div>
 {:else if platform === "macos"}
-    <div class="macos-controls"
-        role="group"
+    <div class="macos-controls" role="group"
         onmouseenter={() => {macosHovered = true}}
         onmouseleave={() => {macosHovered = false}}
     >
-        <button
-            class="macos-button"
-            title="Close"
-            aria-label="Close"
-        >
-            {#if macosHovered}
-                <CloseHoverMacos size={"var(--size-3-5)"} />
-            {:else}
-                <CloseNormalMacos size={"var(--size-3-5)"} />
+        <button class="macos-button" title="Close" aria-label="Close">
+            {#if macosHovered} <CloseHoverMacos size={"var(--size-3-5)"} /> 
+            {:else} <CloseNormalMacos size={"var(--size-3-5)"} />
             {/if}
         </button>
 
-        <button
-            class="macos-button"
-            title="Minimize"
-            aria-label="Minimize"
-        >
-            {#if macosHovered}
-                <MinimizeHoverMacos size={"var(--size-3-5)"} />
-            {:else}
-                <MinimizeNormalMacos size={"var(--size-3-5)"} />
+        <button class="macos-button" title="Minimize" aria-label="Minimize">
+            {#if macosHovered} <MinimizeHoverMacos size={"var(--size-3-5)"} /> 
+            {:else} <MinimizeNormalMacos size={"var(--size-3-5)"} />
             {/if}
         </button>
 
-        <button
-            class="macos-button"
-            title="Maximize"
-            aria-label="Maximize"
-        >
-            {#if macosHovered}
-                <MaximizeHoverMacos size={"var(--size-3-5)"} />
-            {:else}
-                <MaximizeNormalMacos size={"var(--size-3-5)"} />
+        <button class="macos-button" title="Maximize" aria-label="Maximize">
+            {#if macosHovered} <MaximizeHoverMacos size={"var(--size-3-5)"} />
+            {:else} <MaximizeNormalMacos size={"var(--size-3-5)"} />
             {/if}
         </button>
     </div>
@@ -97,28 +64,33 @@
 {/if}
 
 <style>
+.windows-controls {
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+}
 .titlebar-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: var(--size-0-5) var(--size-3);
-    border-radius: var(--size-1);
     height: 100%;
     background: none;
     border: none;
     cursor: pointer;
-}
-.titlebar-button:hover {
-    background: #5bbec3;
+    transition: all 0.1s ease;
+    box-sizing: border-box;
+    color: var(--fg);
 }
 #titlebar-minimize:hover {
-    background: var(--opacity-3);
+    background-color: var(--fg-5);
 }
 #titlebar-maximize:hover {
-    background: var(--opacity-3);
+    background-color: var(--fg-5);
 }
 #titlebar-close:hover {
-    background: var(--std-red);
+    background-color: red;
+    color: white;
 }
 .macos-button{
     display: inline-flex;
