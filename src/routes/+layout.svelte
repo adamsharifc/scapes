@@ -20,12 +20,13 @@
     flex-direction: column;
     height: 100vh;
     box-sizing: border-box;
+    width: 100%;    
 }
 .main-content {
-    flex: 1 1 auto;
+    flex: 1;
     min-height: 0;
     overflow: auto;
-    border: 1px solid red;
     box-sizing: border-box;
+    margin-top: var(--titlebar-height);
 }
 </style>
