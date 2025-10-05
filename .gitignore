@@ -16,3 +16,4 @@ src-tauri/target
 src-tauri/gen/schemas
 
 src/assets/MOCK_DATA.csv
+src-tauri/utils/sounds.db

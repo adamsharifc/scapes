@@ -1,0 +1,194 @@
+.virtual-table-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+}
+.virtual-table-container {
+	width: 100%;
+	flex: 1;
+	overflow: auto; /* Enable both horizontal and vertical scrolling */
+	position: relative;
+	box-sizing: border-box;
+}
+.sticky-table {
+	border-collapse: collapse;
+	table-layout: fixed; /* Fixed layout respects col widths exactly */
+}
+.sticky-left {
+	position: sticky;
+	z-index: 5;
+	background: var(--bg);
+}
+.sticky-right {
+	position: sticky;
+	z-index: 5;
+	background: var(--bg);
+}
+/* Header sticky columns should be above body sticky columns */
+.table-header .sticky-left,
+.table-header .sticky-right {
+	z-index: 15;
+}
+.spacer-row {
+	border: none;
+	background: transparent;
+}
+.spacer-row td {
+	padding: 0;
+	border: none;
+	height: inherit;
+	border-bottom: none;
+	border-top: none;
+}
+.table-header th {
+	/* All header cells are sticky vertically, some also horizontally */
+	position: sticky;
+	z-index: 10;
+}
+.sticky-table th,
+.sticky-table td {
+	border: 1px solid var(--fg-20);
+    padding: 0 var(--size-2);
+	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+.sticky-table th {
+	background-color: var(--fg-7-solid);
+	z-index: 1;
+    font-weight: 500;
+    font-family: var(--font-sans);
+}
+.sticky-table th button {
+	background: none;
+    padding: 0;
+	border: none;
+	font: inherit;
+	cursor: pointer;
+	width: 100%;
+	text-align: left;
+	margin: 0;
+	font-weight: 500;
+    font-family: var(--font-sans);
+}
+.sticky-table tbody tr td{
+    font-family: "Geist Mono", monospace;
+    font-weight: 500;
+    font-size: var(--size-3-7-5);
+    color: var(--fg-70);
+}
+.sticky-table th button:hover {
+	background-color: red;
+}
+.sticky-table tbody tr:hover {
+	background-color: var(--fg-5);
+}
+.sticky-table tbody tr.selected {
+	background-color: var(--fg-7) !important;
+	border-left: 2px solid var(--fg-50);
+}
+.sticky-table tbody tr.selected:hover {
+	background-color: var(--fg-10) !important;
+}
+.sticky-table tbody tr {
+	cursor: pointer;
+	user-select: none;
+}
+.sticky-table tbody tr:focus {
+	outline: 1px solid var(--fg-50);
+	outline-offset: -1px;
+}
+
+/* Resizer handle styles */
+.resizable-header {
+	position: relative;
+	padding-right: 8px;
+}
+.col-resizer {
+	position: absolute;
+	top: 0;
+	right: -6px;
+	width: 12px;
+	height: 100%;
+	cursor: col-resize;
+	touch-action: none;
+	background: transparent;
+}
+.col-resizer:active {
+	background: green;
+}
+.context-menu {
+	background: yellow;
+	display: flex;
+	flex-direction: column;
+}
+.context-menu button {
+	background: none;
+	border: none;
+	text-align: left;
+	cursor: pointer;
+}
+.context-menu button:hover {
+	background: gold;
+}
+.context-menu hr {
+	margin: 0.25rem 0;
+	border: none;
+	border-top: 1px solid blue;
+}
+/* Portal wrapper should sit above the sticky header */
+.context-portal {
+	position: absolute;
+	z-index: 9999;
+	pointer-events: auto;
+}
+/* Control panel above the table for toggling columns */
+.table-controls {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+	box-sizing: border-box;
+    gap: var(--size-2);
+    padding-bottom: var(--size-2);
+}
+.columns-toggle {
+	display: flex;
+	align-items: center;
+}
+.col-toggle {
+	display: inline-flex;
+	align-items: center;
+}
+.show-all {
+	cursor: pointer;
+}
+.selection-info {
+	display: flex;
+	align-items: center;
+}
+.selected-count {
+	color: var(--fg-70);
+}
+.selection-hint {
+
+}
+.clear-selection {
+	color: var(--fg-70);
+	border: none;
+	cursor: pointer;
+}
+.clear-selection:hover {
+	
+}
+/* Invisible anchor used for popper reference */
+.virtual-anchor {
+	position: absolute;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}

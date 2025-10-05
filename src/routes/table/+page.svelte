@@ -2,17 +2,15 @@
     import Table from "$lib/Table/Table.svelte";
 </script>
 
-<div class="page-container">
+<div class="container">
     <Table />
 </div>
 
 <style>
-    .page-container {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 1rem;
-    }
+.container {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
+}
 </style>

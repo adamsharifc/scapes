@@ -58,7 +58,7 @@
 .btn {
     background: none;
     border: none;
-    padding: 0 var(--size-1-5);
+    padding: 0 var(--size-2);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -66,6 +66,6 @@
     box-sizing: border-box;
 }
 .btn:hover {
-    background-color: var(--fg-3);
+    background-color: var(--fg-7);
 }
 </style>

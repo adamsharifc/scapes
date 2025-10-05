@@ -83,10 +83,10 @@
     color: var(--fg);
 }
 #titlebar-minimize:hover {
-    background-color: var(--fg-5);
+    background-color: var(--fg-7);
 }
 #titlebar-maximize:hover {
-    background-color: var(--fg-5);
+    background-color: var(--fg-7);
 }
 #titlebar-close:hover {
     background-color: red;
